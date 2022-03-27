@@ -17,7 +17,7 @@ const Table = ({Data}) => {
                     </tr>
                 </thead>
                 <tbody>
-                {Data && Data.map((eachData, id)=>
+                {Data.length ? Data.map((eachData, id)=>
                     <tr key={id}>
                         <td>{eachData.order_id}</td>
                         <td>{eachData.customer}</td>
@@ -27,7 +27,7 @@ const Table = ({Data}) => {
                         <td><button style={{border:"none",margin:"5px",borderRadius:"15px", width:"90px", height:"32px", background:eachData.status==='Delivered'?"#ADDAEA":eachData.status=== "Completed"?"#E5FFED":"#FFFAE5",
                         color:eachData.status==='Delivered'?"#0099CC":eachData.status=== "Completed"?"#78AB46":"#FFCC11"}}>{eachData.status}</button></td>
                     </tr>
-                )
+                ): <h2>No Data found</h2>
                     }
                 </tbody>
             </table>
