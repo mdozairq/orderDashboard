@@ -13,7 +13,8 @@ function App() {
   const [status, setStatus] = useState("");
   const [dateOrder, setDateOrder] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-
+  axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   const fetchDetails = async () => {
     const response = await axios.get("https://my-json-server.typicode.com/Ved-X/assignment/orders");
     setData(response.data);
