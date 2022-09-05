@@ -19,6 +19,42 @@ function App() {
     setData(response.data);
   };
 
+  const onButtonClick =async () => {
+    // using Java Script method to get PDF file
+    /* try {
+    let blob = await /* fetch('https://treflo-static.sgp1.digitaloceanspaces.com/administration/templates_1661858500647_Thermal%202in.pdf').then(r => r.blob());
+    console.log(blob) 
+     fetch('https://treflo-static.sgp1.digitaloceanspaces.com/administration/templates_1661858500647_Thermal%202in.pdf', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/pdf',
+      }, */
+      try {
+        /* fetch('https://treflo-static.sgp1.digitaloceanspaces.com/administration/templates_1661858500647_Thermal%202in.pdf').then(response => {
+          response.blob().then(blob => {
+            console.log(blob)
+              // Creating new object of PDF file
+              const fileURL = window.URL.createObjectURL(blob);
+              // Setting various property values
+              let alink = document.createElement('a');
+              alink.href = fileURL;
+              alink.download = 'SamplePDF.pdf';
+              alink.click();
+          })
+      }) */
+      axios.get(
+        'https://treflo-static.sgp1.digitaloceanspaces.com/administration/templates_1661858500647_Thermal%202in.pdf', 
+        {responseType: 'blob'} // !!!
+      ).then((response) => {
+        console.log('response',response)
+        window.open(URL.createObjectURL(response.data));
+      })
+    
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
   useEffect(() => {
     fetchDetails();
   }, [])
@@ -51,6 +87,7 @@ function App() {
       <Header length={Data.length} newLength={filteredData.length} />
       <Filter setOpen={setOpen} setSearch={setSearch} search={search} />
       <Table Data={filteredData} />
+      <button onClick={onButtonClick}>download</button>
     </div>
   );
 }
